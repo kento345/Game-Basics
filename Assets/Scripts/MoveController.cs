@@ -1,30 +1,34 @@
+ï»¿using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MoveController : MonoBehaviour
-{ //‘OŒã¶‰EˆÚ“®
-    [SerializeField] private float speed = 10.0f;  //ˆÚ“®‘¬“x
-    private Vector2 inputVer;                      //X,Y²‚ÌˆÚ“®“ü—Í’l‚ğ•Û
 
-    //-----ˆÚ“®“ü—Í-----
+public class MoveController : MonoBehaviour
+{
+    
+
+    [SerializeField] private float speed = 10.0f;  //ç§»å‹•é€Ÿåº¦
+    private Vector2 inputVer;                      //X,Yè»¸ã®ç§»å‹•å…¥åŠ›å€¤ã‚’ä¿æŒ
+
+    //-----ç§»å‹•å…¥åŠ›-----
     public void OnMove(InputAction.CallbackContext context)
     {
-        //X,Y²‚ÌˆÚ“®“ü—Í’l‚Ìæ“¾
+        //X,Yè»¸ã®ç§»å‹•å…¥åŠ›å€¤ã®å–å¾—
         inputVer = context.ReadValue<Vector2>();
     }
 
     void Update()
     {
-        //ˆÚ“®ˆ—Às
+        //ç§»å‹•å‡¦ç†å®Ÿè¡Œ
         Move();
     }
 
-    //-----ˆÚ“®ˆ—ŠÖ”-----
+    //-----ç§»å‹•å‡¦ç†é–¢æ•°-----
     void Move()
     {
-        //“ü—Í‚ğ3D‚É•ÏŠ·
+        //å…¥åŠ›ã‚’3Dã«å¤‰æ›
         Vector3 move_ = new Vector3(inputVer.x,0f,inputVer.y) * speed * Time.deltaTime;
-        //Œ»İ’n‚ÉˆÚ“®—Ê‚Ì‰ÁZ
+        //ç¾åœ¨åœ°ã«ç§»å‹•é‡ã®åŠ ç®—
         transform.position += move_;
     }
 }

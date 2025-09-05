@@ -1,52 +1,52 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class JumpController : MonoBehaviour
 {
-    Rigidbody rb;                                     // ©g‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚éRigidbodyi•¨—‹““®—pj
-    [SerializeField] private float JumpPower = 5.0f;  // ƒWƒƒƒ“ƒv‚Ì—ÍiInspector‚©‚ç’²®‰Â”\j
-    [SerializeField] private LayerMask groundLayer;   // u’n–Êv‚Æ‚µ‚Ä”»’è‚·‚éLayer‚ğw’è
-    bool isGround = false;                            // Œ»İA’n–Ê‚É‚¢‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+    [SerializeField] private float JumpPower = 5.0f;  // ã‚¸ãƒ£ãƒ³ãƒ—ã®åŠ›ï¼ˆInspectorã‹ã‚‰èª¿æ•´å¯èƒ½ï¼‰
+    Rigidbody rb;                                     // è‡ªèº«ã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹Rigidbodyï¼ˆç‰©ç†æŒ™å‹•ç”¨ï¼‰
+    [SerializeField] private LayerMask groundLayer;   // ã€Œåœ°é¢ã€ã¨ã—ã¦åˆ¤å®šã™ã‚‹Layerã‚’æŒ‡å®š
+    bool isGround = false;                            // ç¾åœ¨ã€åœ°é¢ã«ã„ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 
 
-    // ----- ƒWƒƒƒ“ƒv“ü—Íˆ— -----
-    // Input System‚ÅuJumpvƒAƒNƒVƒ‡ƒ“‚ªŒÄ‚Î‚ê‚½‚ÉÀs‚³‚ê‚é
+    // ----- ã‚¸ãƒ£ãƒ³ãƒ—å…¥åŠ›å‡¦ç† -----
+    // Input Systemã§ã€ŒJumpã€ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãŒå‘¼ã°ã‚ŒãŸæ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹
     public void OnJump(InputAction.CallbackContext context)
     {
-        // “ü—Í‚ªuperformedvó‘Ôi‰Ÿ‚³‚ê‚½uŠÔj‚©‚Â’n–Ê‚É‚¢‚éê‡‚Ì‚İƒWƒƒƒ“ƒv‰Â”\
+        // å…¥åŠ›ãŒã€Œperformedã€çŠ¶æ…‹ï¼ˆæŠ¼ã•ã‚ŒãŸç¬é–“ï¼‰ã‹ã¤åœ°é¢ã«ã„ã‚‹å ´åˆã®ã¿ã‚¸ãƒ£ãƒ³ãƒ—å¯èƒ½
         if (context.performed && isGround)
         {
-            // ã•ûŒüiVector3.upj‚É—Í‚ğ‰Á‚¦‚ÄƒWƒƒƒ“ƒv‚·‚é
+            // ä¸Šæ–¹å‘ï¼ˆVector3.upï¼‰ã«åŠ›ã‚’åŠ ãˆã¦ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹
             rb.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
 
-            // ‹ó’†ó‘Ô‚É•ÏXi˜A‘±ƒWƒƒƒ“ƒv–h~j
+            // ç©ºä¸­çŠ¶æ…‹ã«å¤‰æ›´ï¼ˆé€£ç¶šã‚¸ãƒ£ãƒ³ãƒ—é˜²æ­¢ï¼‰
             isGround = false;
         }
     }
 
 
-    // ----- ‰Šú‰»ˆ— -----
+    // ----- åˆæœŸåŒ–å‡¦ç† -----
     void Start()
     {
-        // ©g‚ÌRigidbody‚ğæ“¾
+        // è‡ªèº«ã®Rigidbodyã‚’å–å¾—
         rb = GetComponent<Rigidbody>();
     }
 
 
-    // ----- ÚG”»’è -----
+    // ----- æ¥è§¦åˆ¤å®š -----
     private void OnCollisionEnter(Collision collision)
     {
-        // ÚG‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ìlayer‚ª groundLayer ‚ÉŠÜ‚Ü‚ê‚Ä‚¢‚é‚©”»’è
-        // u1 << collision.gameObject.layerv‚Å‚»‚ÌƒIƒuƒWƒFƒNƒg‚Ìlayer‚ğƒrƒbƒg‚É•ÏŠ·
-        // groundLayeriLayerMaskj‚Æ‚ÌAND‚ğæ‚Á‚Ä0‚Å‚È‚¯‚ê‚Îu’n–Êv‚Æ‚İ‚È‚·
+        // æ¥è§¦ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®layerãŒ groundLayer ã«å«ã¾ã‚Œã¦ã„ã‚‹ã‹åˆ¤å®š
+        // ã€Œ1 << collision.gameObject.layerã€ã§ãã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®layerã‚’ãƒ“ãƒƒãƒˆã«å¤‰æ›
+        // groundLayerï¼ˆLayerMaskï¼‰ã¨ã®ANDã‚’å–ã£ã¦0ã§ãªã‘ã‚Œã°ã€Œåœ°é¢ã€ã¨ã¿ãªã™
         if (((1 << collision.gameObject.layer) & groundLayer) != 0)
         {
-            isGround = true; // ’n–Ê‚É’…’n‚µ‚½‚Ì‚Åƒtƒ‰ƒO‚ğON
+            isGround = true; // åœ°é¢ã«ç€åœ°ã—ãŸã®ã§ãƒ•ãƒ©ã‚°ã‚’ON
         }
 
         /*
-        // © ƒVƒ“ƒvƒ‹‚ÉuGroundv‚Æ‚¢‚¤–¼‘O‚ÌLayerŒÀ’è‚Å”»’è‚µ‚½‚¢‚È‚ç‚±‚¿‚ç‚Å‚àOK
-        //Layer‚Ì–¼‘O‚Ì‘Å‚¿ƒ~ƒX‚µ‚â‚·‚¢
+        // â† ã‚·ãƒ³ãƒ—ãƒ«ã«ã€ŒGroundã€ã¨ã„ã†åå‰ã®Layeré™å®šã§åˆ¤å®šã—ãŸã„ãªã‚‰ã“ã¡ã‚‰ã§ã‚‚OK
+        //Layerã®åå‰ã®æ‰“ã¡ãƒŸã‚¹ã—ã‚„ã™ã„
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGround = true;

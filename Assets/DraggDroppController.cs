@@ -1,29 +1,32 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 public class DraggDroppController : MonoBehaviour
 {
+    
+
     private GameObject selectObject = null;
     private Vector3 offset;
     private float dragDistance;
     private float originalY = 1f;
 
-    [SerializeField] private LayerMask Dragglayer;
-    private RaycastHit hit;
 
-    
+    [SerializeField] private LayerMask Dragglayer;
+
     //-----Ray-----
     private Ray ray;
+    private RaycastHit hit;
 
 
     public void OnMouse1(InputAction.CallbackContext context)
     {
-        // ¶ƒNƒŠƒbƒN
+        // å·¦ã‚¯ãƒªãƒƒã‚¯
         if (context.performed)
         {
             Dragg();
         }
-        // ƒhƒ‰ƒbƒOI—¹
+        // ãƒ‰ãƒ©ãƒƒã‚°çµ‚äº†
         if (context.canceled)
         {
             selectObject = null;
@@ -36,16 +39,16 @@ public class DraggDroppController : MonoBehaviour
     void Update()
     {
        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
 
-        // ƒhƒ‰ƒbƒO’†
+        // ãƒ‰ãƒ©ãƒƒã‚°ä¸­
         if (selectObject != null)
         {
             if (((1 << selectObject.gameObject.layer) & Dragglayer) != 0)
             {
-                // DraggLayer‚ÌƒIƒuƒWƒFƒNƒg‚ÍˆÚ“®
+                // DraggLayerã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ç§»å‹•
                 Vector3 worldPos = ray.GetPoint(dragDistance);
-                selectObject.transform.position = new Vector3(worldPos.x + offset.x, originalY, worldPos.z + offset.z);
-
+                selectObject.transform.position = new Vector3(worldPos.x + offset.x,originalY, worldPos.z + offset.z);
             }
         }
     }
