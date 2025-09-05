@@ -9,7 +9,6 @@ public class DraggDroppController : MonoBehaviour
     private GameObject selectObject = null;
     private Vector3 offset;
     private float dragDistance;
-    private float originalY = 1f;
 
 
     [SerializeField] private LayerMask Dragglayer;
@@ -48,16 +47,10 @@ public class DraggDroppController : MonoBehaviour
             {
                 // DraggLayerのオブジェクトは移動
                 Vector3 worldPos = ray.GetPoint(dragDistance);
-                selectObject.transform.position = new Vector3(worldPos.x + offset.x,originalY, worldPos.z + offset.z);
+                selectObject.transform.position = new Vector3(worldPos.x + offset.x,0.5f, worldPos.z + offset.z);
             }
         }
     }
-
-    void MoveObject()
-    {
-
-    }
-
 
     void Dragg()
     {
